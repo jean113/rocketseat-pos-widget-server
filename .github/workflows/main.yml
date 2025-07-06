@@ -1,1 +1,20 @@
+name: widget-server pipe
 
+on: 
+  push:
+    braches: 
+    #  // pode aplicar a regrar a várias branches
+      - 'main'
+
+# pode ter vários jobs
+jobs:
+  Build:
+    name: Build
+    # pipe geralmente roda em cima de linux
+    runs-on: ubuntu-latest
+    # o job pode ter várias etapas
+    steps:
+        # identifica o que essa etapa faz
+      - name: Checkout
+        # esta usando uma add-on para fazer o checkout para nós
+        uses: actions/checkout@v4
