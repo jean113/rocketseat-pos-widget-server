@@ -1,0 +1,12 @@
+node_modules
+.env
+.env.example
+Dockerfile
+dist
+.git
+node_modules/
+tmp/
+logs/
+*.log
+.DS_Store
+venv/
