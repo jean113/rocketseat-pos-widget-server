@@ -38,6 +38,6 @@ jobs:
         # executa dentro da nossa iamgem
         # o pipe (|) permite executar mais de um comando
         run: | 
-          docker build -t widget-server:v3
+          docker build -t widget-server:v3 .
           docker tag widget-server:v3 350266667290.dkr.ecr.us-east-2.amazonaws.com/rocketseat/widget-server:v3
           docker push 350266667290.dkr.ecr.us-east-2.amazonaws.com/rocketseat/widget-server:v3
