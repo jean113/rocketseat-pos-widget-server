@@ -41,7 +41,7 @@ jobs:
         # $GITHUB_SHA | head -c7 - faz com que pegue os 7 primeiros caracteres da hash do commit 
         # "sha=$SHA" >> $GITHUB_OUTPUT estou colocando o valor de $SHA na variavel sha e colocando no output do github
         run: |
-          SHA=${ECHO $GITHUB_SHA | head -c7}
+          SHA=$(ECHO $GITHUB_SHA | head -c7)
           echo "sha=$SHA" >> $GITHUB_OUTPUT
 
       - name: Build and push image to AWS ECR
