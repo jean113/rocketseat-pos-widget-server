@@ -25,7 +25,7 @@ RUN pnpm build
 # descart as dev dependencia
 RUN pnpm prune --prod
 
-FROM node:20-slim-bookworm AS deploy
+FROM node:20 AS deploy
 
 USER 1000
 
