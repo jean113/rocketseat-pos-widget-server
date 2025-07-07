@@ -25,7 +25,7 @@ RUN pnpm build
 # descart as dev dependencia
 RUN pnpm prune --prod
 
-FROM grc.io/distroless/nodejs20-debian12 AS deploy
+FROM node:20-slim-bookworm AS deploy
 
 USER 1000
 
