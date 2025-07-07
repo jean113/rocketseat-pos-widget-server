@@ -35,14 +35,23 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Generate tag
+        id: generate_tag
+        # GITHUB_SHA - pega o hash do commit  do commit
+        # $GITHUB_SHA | head -c7 - faz com que pegue os 7 primeiros caracteres da hash do commit 
+        # "sha=$SHA" >> $GITHUB_OUTPUT estou colocando o valor de $SHA na variavel sha e colocando no output do github
+        run: |
+          SHA=${ECHO $GITHUB_SHA | head -c7}
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+
       - name: Build and push image to AWS ECR
         id: build-push-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ steps.generate_tag.outputs.sha }}
         # executa dentro da nossa iamgem
         # o pipe (|) permite executar mais de um comando
         run: | 
-          docker build -t widget-server:v3 .
-          docker tag widget-server:v3 $ECR_REGISTRY/$ECR_REPOSITORY:v3
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:v3
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
